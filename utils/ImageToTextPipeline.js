@@ -1,7 +1,8 @@
-import { pipeline } from '@xenova/transformers';
+import { pipeline, env } from '@xenova/transformers';
 
 const createImageToTextPipeline = async () => {
     // Initialize the pipeline here
+    env.cacheDir = './.cachedModel';
     const pipe = await pipeline('image-to-text');
     
     // Return an object with a method to access the pipeline instance
