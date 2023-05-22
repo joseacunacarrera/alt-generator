@@ -3,11 +3,15 @@ import { existsSync, mkdirSync } from 'fs';
 
 const createImageToTextPipeline = async () => {
     // Initialize the transformers cache folder
-    const folderName = '/temp/.cachedModel'
-    if (!existsSync(folderName)) {
-        mkdirSync(folderName);
+    const tempFolder = '/temp/'
+    if (!existsSync(tempFolder)) {
+        mkdirSync(tempFolder);
       }
-    env.cacheDir = folderName;
+    const transformersFolder = tempFolder + '.cachedModel';
+    if (!existsSync(transformersFolder)) {
+        mkdirSync(transformersFolder);
+      }
+    env.cacheDir = transformersFolder;
     // Initialize the pipeline here
     const pipe = await pipeline('image-to-text');
     
