@@ -13,7 +13,7 @@ export default function Home() {
     formData.append('image', file);
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/describe', {
+      const response = await fetch('http://34.16.132.89:5000/describe', {
         method: 'POST',
         body: formData,
       });
