@@ -1,13 +1,17 @@
-import pipeline from '../../utils/ImageToTextPipeline'
+import { Readable } from 'stream';
+import FormData from 'form-data';
 
 export default async function handler(req, res) {
+  console.log(req.body)
+  try {
+    const response = await fetch('http://34.16.132.89:5000/describe', {
+      method: 'POST',
+      body: req.body,
+    });
+    const data = await response.json();
 
-    // get instance of the image to text model
-    const myPipeline = await pipeline.getInstance();
-    const pipe = myPipeline.getPipeline();
-    // Send in an image
-    let out = await pipe('public/bread.jpg');
-    
-    let generated_text = out.at(0).generated_text;
-    res.status(200).json({ generated_text })
+    res.status(response.status).json(data);
+  } catch (error) {
+    res.status(500).json({ error: error });
   }
+}

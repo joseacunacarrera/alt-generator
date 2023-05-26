@@ -5,14 +5,14 @@ import { Inter } from 'next/font/google'
 
 export default function Home() {
 
-  const [generatedText, setGeneratedText] = useState(' ');
+  const [generatedText, setGeneratedText] = useState('');
 
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append('image', file);
-
     try {
+      console.log(formData)
       const response = await fetch('http://34.16.132.89:5000/describe', {
         method: 'POST',
         body: formData,
@@ -29,6 +29,7 @@ export default function Home() {
     <>
       <Head>
         <title>Alt Tag Generator</title>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
         <meta name="description" content="Alt tag generator for images" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
